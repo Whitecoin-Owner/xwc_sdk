@@ -1,0 +1,9 @@
+/xwc_sdk.exe
+/xwc_sdk
+/build
+/dist
+/.idea
+/.vscode
+/*.iml
+*~
+/*.log
