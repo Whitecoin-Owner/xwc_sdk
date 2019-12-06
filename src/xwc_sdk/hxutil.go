@@ -52,8 +52,8 @@ const (
 	fieldGasPrice           = "gasPrice"
 	fieldGasLimit           = "gasLimit"
 
-	xwcPrecisionBits = 5
-	xwcPrecision     = 100000
+	xwcPrecisionBits = 8
+	xwcPrecision     = 100000000
 )
 
 func getAssetId(coinType string) string {
