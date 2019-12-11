@@ -182,17 +182,18 @@ func GetAddressByPubkey(pubkeyByte []byte, nettype string, version uint32) strin
 }
 
 func ValidateAddress(address, net string) bool {
+	prefixLen := 3
 	defer func() {
 		if r := recover(); r != nil {
 			return
 		}
 	}()
 
-	if len(address) <= 2 {
+	if len(address) <= prefixLen {
 		return false
 	}
-	// res := address[2:]
-	buf := base58.Decode(address[2:])
+	// res := address[prefixLen:]
+	buf := base58.Decode(address[prefixLen:])
 	if len(buf) < 8 {
 		return false
 	}
@@ -263,12 +264,12 @@ func GetAddress(seed []byte, nettype string, account uint32, addrIndex uint32, v
 }
 
 func GetAddressBytes(addr string) ([]byte, error) {
-
-	if len(addr) <= 2 {
+	prefixLen := 3
+	if len(addr) <= prefixLen {
 		return nil, fmt.Errorf("in GetAddressBytes function, wrong addr format")
 	}
 
-	base58_addr := addr[2:]
+	base58_addr := addr[prefixLen:]
 
 	addrBytes := base58.Decode(base58_addr)
 
@@ -276,12 +277,12 @@ func GetAddressBytes(addr string) ([]byte, error) {
 }
 
 func GetPubkeyBytes(pub string) ([]byte, error) {
-
-	if len(pub) <= 2 {
+	prefixLen := 3
+	if len(pub) <= prefixLen {
 		return nil, fmt.Errorf("in GetAddressBytes function, wrong addr format")
 	}
 
-	base58_addr := pub[2:]
+	base58_addr := pub[prefixLen:]
 
 	pubBytes := base58.Decode(base58_addr)
 
