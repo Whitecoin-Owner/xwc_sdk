@@ -1,4 +1,5 @@
 /**
+ * Author: wengqiang (email: wens.wq@gmail.com  site: qiangweng.site)
  *
  * Copyright © 2015--2018 . All rights reserved.
  *
@@ -182,18 +183,17 @@ func GetAddressByPubkey(pubkeyByte []byte, nettype string, version uint32) strin
 }
 
 func ValidateAddress(address, net string) bool {
-	prefixLen := 3
 	defer func() {
 		if r := recover(); r != nil {
 			return
 		}
 	}()
 
-	if len(address) <= prefixLen {
+	if len(address) <= len(CoinXWC) {
 		return false
 	}
-	// res := address[prefixLen:]
-	buf := base58.Decode(address[prefixLen:])
+	// res := address[2:]
+	buf := base58.Decode(address[len(CoinXWC):])
 	if len(buf) < 8 {
 		return false
 	}
@@ -264,12 +264,12 @@ func GetAddress(seed []byte, nettype string, account uint32, addrIndex uint32, v
 }
 
 func GetAddressBytes(addr string) ([]byte, error) {
-	prefixLen := 3
-	if len(addr) <= prefixLen {
+
+	if len(addr) <= len(CoinXWC) {
 		return nil, fmt.Errorf("in GetAddressBytes function, wrong addr format")
 	}
 
-	base58_addr := addr[prefixLen:]
+	base58_addr := addr[len(CoinXWC):]
 
 	addrBytes := base58.Decode(base58_addr)
 
@@ -277,12 +277,12 @@ func GetAddressBytes(addr string) ([]byte, error) {
 }
 
 func GetPubkeyBytes(pub string) ([]byte, error) {
-	prefixLen := 3
-	if len(pub) <= prefixLen {
+
+	if len(pub) <= len(CoinXWC) {
 		return nil, fmt.Errorf("in GetAddressBytes function, wrong addr format")
 	}
 
-	base58_addr := pub[prefixLen:]
+	base58_addr := pub[len(CoinXWC):]
 
 	pubBytes := base58.Decode(base58_addr)
 
